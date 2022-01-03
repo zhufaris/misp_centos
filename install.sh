@@ -10,8 +10,7 @@
 # > Make sure you source misp.variables.sh (seperate) first           #
 #######################################################################
 
-set -uxo pipefail
-# set -xef
+set -xef
 # Set hostname
 hostnamectl set-hostname misp.local
 
