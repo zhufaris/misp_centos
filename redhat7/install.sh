@@ -13,6 +13,10 @@ debug () {
   fi
 }
 
+prepareUser() {
+  sudo useradd $MISP_USER
+}
+
 enableEPEL () {
   sudo yum install dnf -y
   sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
@@ -195,6 +199,35 @@ permissions_RHEL7 () {
   sudo chown -R $WWW_USER:$WWW_USER $PATH_TO_MISP/app/webroot/img/orgs
   sudo chown -R $WWW_USER:$WWW_USER $PATH_TO_MISP/app/webroot/img/custom
 }
+
+prepareDB_RHEL () {
+  sudo systemctl enable --now mariadb.service
+  echo [mysqld] |sudo tee /etc/my.cnf.d/bind-address.cnf
+  echo bind-address=127.0.0.1 |sudo tee -a /etc/my.cnf.d/bind-address.cnf
+  sudo systemctl restart mariadb
+
+  # Kill the anonymous users
+  sudo mysql -h $DBHOST -e "DROP USER IF EXISTS ''@'localhost'"
+  # Because our hostname varies we'll use some Bash magic here.
+  sudo mysql -h $DBHOST -e "DROP USER IF EXISTS ''@'$(hostname)'"
+  # Kill off the demo database
+  sudo mysql -h $DBHOST -e "DROP DATABASE IF EXISTS test"
+  # No root remote logins
+  sudo mysql -h $DBHOST -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+  # Make sure that NOBODY can access the server without a password
+  sudo mysqladmin -h $DBHOST -u "${DBUSER_ADMIN}" password "${DBPASSWORD_ADMIN}"
+  # Make our changes take effect
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "FLUSH PRIVILEGES"
+
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "CREATE DATABASE ${DBNAME};"
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "CREATE USER '${DBUSER_MISP}'@'localhost' IDENTIFIED BY '${DBPASSWORD_MISP}';"
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "GRANT USAGE ON *.* to '${DBUSER_MISP}'@'localhost';"
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "GRANT ALL PRIVILEGES on ${DBNAME}.* to '${DBUSER_MISP}'@'localhost';"
+  sudo mysql -h $DBHOST -u "${DBUSER_ADMIN}" -p"${DBPASSWORD_ADMIN}" -e "FLUSH PRIVILEGES;"
+  # Import the empty MISP database from MYSQL.sql
+  ${SUDO_WWW} cat ${PATH_TO_MISP}/INSTALL/MYSQL.sql | mysql -h $DBHOST -u "${DBUSER_MISP}" -p"${DBPASSWORD_MISP}" ${DBNAME}
+}
+# <snippet-end 1_prepareDB_RHEL.sh>
 
 apacheConfig_RHEL7 () {
   # Now configure your apache server with the DocumentRoot $PATH_TO_MISP/app/webroot/
@@ -666,7 +699,7 @@ updateGOWNT () {
 }
 
 
-
+prepareUser
 enableEPEL
 debug "Installing System Dependencies"
 yumInstallCoreDeps7
