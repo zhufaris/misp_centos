@@ -425,7 +425,6 @@ configWorkersRHEL () {
 
 coreCAKE () {
   debug "Running core Cake commands to set sane defaults for ${LBLUE}MISP${NC}"
-  sudo sed -i '298s/require/\#require/' /var/www/MISP/app/Config/core.php
 
   # IF you have logged in prior to running this, it will fail but the fail is NON-blocking
   ${SUDO_WWW} ${RUN_PHP} -- ${CAKE} userInit -q
