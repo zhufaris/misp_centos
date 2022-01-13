@@ -1,0 +1,64 @@
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin setSetting Security.check_sec_fetch_site_header true
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin setSetting Security.csp_enforce true
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin setSetting Security.advanced_authkeys true
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin setSetting Security.do_not_log_authkeys true
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin setSetting Security.username_in_response_header true
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Live 1
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ debug 'Updating tables'
++ echo -e 'Next step: Updating tables'
+Next step: Updating tables
++ [[ ! -z '' ]]
++ :
++ updateGOWNT
++ sudo -H -u apache -- mysql -h localhost -u misp -ppassword misp -e 'SELECT authkey FROM users;'
++ tail -1
+++ cat /tmp/auth.key
++ AUTH_KEY=
++ rm /tmp/auth.key
++ debug 'Updating Galaxies, ObjectTemplates, Warninglists, Noticelists and Templates'
++ echo -e 'Next step: Updating Galaxies, ObjectTemplates, Warninglists, Noticelists and Templates'
+Next step: Updating Galaxies, ObjectTemplates, Warninglists, Noticelists and Templates
++ [[ ! -z '' ]]
++ :
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin updateGalaxies
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin updateTaxonomies
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin updateWarningLists
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin updateNoticeLists
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ sudo -H -u apache -- /var/www/MISP/app/Console/cake Admin updateObjectTemplates 1337
+PHP Warning:  PHP Startup: session.configuration 'session.sid_length' must be between 22 and 256. in Unknown on line 0
+PHP Warning:  require_once(/var/www/MISP/app/Vendor/autoload.php): failed to open stream: No such file or directory in /var/www/MISP/app/Config/core.php on line 298
+PHP Fatal error:  require_once(): Failed opening required '/var/www/MISP/app/Vendor/autoload.php' (include_path='/var/www/MISP/app/Lib/cakephp/lib:.:/usr/share/pear:/usr/share/php') in /var/www/MISP/app/Config/core.php on line 298
++ echo 'Core Intallation finished, check on port 443 to see the Web UI'
+Core Intallation finished, check on port 443 to see the Web UI
