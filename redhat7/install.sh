@@ -166,6 +166,8 @@ installCake_RHEL () {
   memory_limit=2048M
   upload_max_filesize=50M
   post_max_size=50M
+  session0sid_length="32"
+  session0use_strict_mode="1"
   for key in upload_max_filesize post_max_size max_execution_time max_input_time memory_limit
   do
       sudo sed -i "s/^\($key\).*/\1 = $(eval echo \${$key})/" $PHP_INI
